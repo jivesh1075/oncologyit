@@ -1,0 +1,60 @@
+{
+  "id": "ai-foundations",
+  "title": "Foundations of AI in Healthcare",
+  "subtitle": "OncologyIT Certified: AI Fundamentals",
+  "description": "A comprehensive introduction to artificial intelligence for healthcare professionals. Covers core AI concepts, clinical applications, regulatory landscape, implementation strategy, and ethical considerations.",
+  "price_cents": 14900,
+  "stripe_price_id": "price_REPLACE_WITH_STRIPE_PRICE_ID",
+  "certificate_title": "OncologyIT Certification in AI Foundations for Healthcare",
+  "passing_score": 80,
+  "modules": [
+    {
+      "id": "mod-01-what-is-ai",
+      "title": "What Is AI? Core Concepts for Clinicians",
+      "order": 1,
+      "content_file": "mod-01-what-is-ai.md"
+    },
+    {
+      "id": "mod-02-ml-fundamentals",
+      "title": "Machine Learning Fundamentals",
+      "order": 2,
+      "content_file": "mod-02-ml-fundamentals.md"
+    },
+    {
+      "id": "mod-03-llms-clinical",
+      "title": "Large Language Models in Clinical Settings",
+      "order": 3,
+      "content_file": "mod-03-llms-clinical.md"
+    },
+    {
+      "id": "mod-04-clinical-applications",
+      "title": "Clinical AI Applications in Oncology",
+      "order": 4,
+      "content_file": "mod-04-clinical-applications.md"
+    },
+    {
+      "id": "mod-05-regulatory",
+      "title": "Regulatory Landscape: FDA, HIPAA, and AI",
+      "order": 5,
+      "content_file": "mod-05-regulatory.md"
+    },
+    {
+      "id": "mod-06-implementation",
+      "title": "AI Implementation Strategy for Health Systems",
+      "order": 6,
+      "content_file": "mod-06-implementation.md"
+    },
+    {
+      "id": "mod-07-ethics-bias",
+      "title": "Ethics, Bias, and Responsible AI in Healthcare",
+      "order": 7,
+      "content_file": "mod-07-ethics-bias.md"
+    },
+    {
+      "id": "mod-08-future",
+      "title": "The Future: Agentic AI and Autonomous Systems",
+      "order": 8,
+      "content_file": "mod-08-future.md"
+    }
+  ]
+}

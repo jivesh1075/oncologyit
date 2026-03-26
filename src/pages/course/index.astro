@@ -1,0 +1,351 @@
+---
+import Base from '../../layouts/Base.astro';
+import courseData from '../../content/courses/ai-foundations/course.json';
+---
+<Base title="AI Foundations Certification — OncologyIT" description="A comprehensive certification in artificial intelligence for healthcare professionals. 8 modules, exam, and formal certificate.">
+  <div class="course-hero">
+    <div class="course-hero-inner">
+      <div class="course-badge">Professional Certification</div>
+      <h1>{courseData.title}</h1>
+      <p class="course-subtitle">{courseData.subtitle}</p>
+      <p class="course-desc">{courseData.description}</p>
+      <div class="course-meta-row">
+        <div class="meta-item">
+          <span class="meta-label">Modules</span>
+          <span class="meta-value">{courseData.modules.length}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Exam</span>
+          <span class="meta-value">40 Questions</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Passing Score</span>
+          <span class="meta-value">{courseData.passing_score}%</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Certificate</span>
+          <span class="meta-value">Formal PDF</span>
+        </div>
+      </div>
+      <div class="course-cta-row">
+        <a href="/course/checkout" class="btn-accent course-buy">
+          Enroll — ${(courseData.price_cents / 100).toFixed(0)}
+        </a>
+        <span class="cta-note">One-time payment · Lifetime access</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CURRICULUM -->
+  <div class="curriculum-section">
+    <div class="section-header">
+      <span class="section-label">Curriculum</span>
+      <span class="section-label">{courseData.modules.length} Modules</span>
+    </div>
+
+    <div class="module-list">
+      {courseData.modules.map((mod, i) => (
+        <div class="module-row">
+          <div class="module-num">{String(i + 1).padStart(2, '0')}</div>
+          <div class="module-info">
+            <h3>{mod.title}</h3>
+          </div>
+          <div class="module-status">
+            <span class="lock-icon">🔒</span>
+          </div>
+        </div>
+      ))}
+      <div class="module-row exam-row">
+        <div class="module-num">✎</div>
+        <div class="module-info">
+          <h3>Certification Exam</h3>
+          <p>40 multiple-choice questions · 80% to pass · Unlimited attempts</p>
+        </div>
+        <div class="module-status">
+          <span class="lock-icon">🔒</span>
+        </div>
+      </div>
+      <div class="module-row cert-row">
+        <div class="module-num">🏆</div>
+        <div class="module-info">
+          <h3>Certificate of Completion</h3>
+          <p>Formal PDF certificate with unique verification ID</p>
+        </div>
+        <div class="module-status"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHO IS THIS FOR -->
+  <div class="audience-section">
+    <h2>Who Is This For?</h2>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="audience-icon">🩺</div>
+        <h4>Practicing Oncologists</h4>
+        <p>Understand AI tools entering your workflow — evaluate them critically, not credulously.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon">💻</div>
+        <h4>Health IT Leaders</h4>
+        <p>Bridge the gap between clinical needs and technical implementation. Speak both languages.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon">🏥</div>
+        <h4>Practice Administrators</h4>
+        <p>Make informed build-vs-buy decisions. Evaluate vendor claims with confidence.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon">📊</div>
+        <h4>Healthcare Strategists</h4>
+        <p>Understand the infrastructure shift from SaaS to AI agents and what it means for your organization.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSTRUCTOR -->
+  <div class="instructor-section">
+    <div class="instructor-inner">
+      <div class="instructor-avatar">JS</div>
+      <div class="instructor-info">
+        <div class="instructor-label">Course Director</div>
+        <h3>Jivesh Sharma, M.D.</h3>
+        <p>Medical oncologist with 30+ years of clinical experience. Former CMIO with early EMR implementation experience (iKnowMed). MIT Sloan AI Healthcare Executive Certificate. CEO of Nexgen Precision. Building at the intersection of oncology and AI infrastructure.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="final-cta">
+    <h2>Ready to build your AI fluency?</h2>
+    <p>One investment. Lifetime access. A credential that signals you understand where healthcare technology is going.</p>
+    <a href="/course/checkout" class="btn-accent course-buy">
+      Enroll — ${(courseData.price_cents / 100).toFixed(0)}
+    </a>
+  </div>
+</Base>
+
+<style>
+.course-hero {
+  padding: 8rem 2rem 4rem;
+  text-align: center;
+  background: var(--bg);
+}
+.course-hero-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.course-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  background: var(--teal-light);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  margin-bottom: 2rem;
+}
+.course-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.course-subtitle {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+.course-desc {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.course-meta-row {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.meta-item { text-align: center; }
+.meta-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+.meta-value {
+  font-weight: 700;
+  font-size: 1rem;
+}
+.course-cta-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+.course-buy {
+  font-size: 1rem;
+  padding: 1rem 3rem;
+}
+.cta-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Curriculum */
+.curriculum-section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+.module-list { display: flex; flex-direction: column; }
+.module-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 50px;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.module-row:first-child { border-top: 1px solid var(--border); }
+.module-row:hover { background: rgba(0,0,0,0.01); }
+.module-num {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-align: center;
+}
+.module-info h3 {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.module-info p {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-top: 0.2rem;
+}
+.exam-row { background: var(--accent-light); }
+.cert-row { background: var(--teal-light); }
+.lock-icon { font-size: 0.85rem; opacity: 0.4; }
+
+/* Audience */
+.audience-section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+.audience-section h2 {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+.audience-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.75rem;
+  text-align: center;
+}
+.audience-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+.audience-card h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.5rem; }
+.audience-card p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.55; }
+
+/* Instructor */
+.instructor-section {
+  background: var(--bg-warm);
+  padding: 4rem 2rem;
+}
+.instructor-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.instructor-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent) 0%, #e07040 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+.instructor-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+.instructor-info h3 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.instructor-info p {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* Final CTA */
+.final-cta {
+  text-align: center;
+  padding: 5rem 2rem;
+}
+.final-cta h2 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 0.75rem;
+}
+.final-cta p {
+  font-size: 1rem;
+  color: var(--text-dim);
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+@media (max-width: 900px) {
+  .course-meta-row { flex-wrap: wrap; gap: 1.5rem; }
+  .audience-grid { grid-template-columns: 1fr 1fr; }
+  .instructor-inner { flex-direction: column; text-align: center; }
+}
+@media (max-width: 600px) {
+  .audience-grid { grid-template-columns: 1fr; }
+}
+</style>

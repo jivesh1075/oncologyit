@@ -1,0 +1,499 @@
+{
+  "course_id": "ai-foundations",
+  "passing_score": 80,
+  "questions_per_attempt": 40,
+  "modules": {
+    "mod-01-what-is-ai": [
+      {
+        "id": "q01-01",
+        "question": "Which of the following best describes the relationship between AI, machine learning, and deep learning?",
+        "options": [
+          "They are three different names for the same technology",
+          "Deep learning is a subset of machine learning, which is a subset of AI",
+          "AI is a subset of machine learning, which is a subset of deep learning",
+          "Machine learning and deep learning are unrelated branches of AI"
+        ],
+        "correct": 1,
+        "explanation": "Deep learning uses multi-layered neural networks and is a subset of machine learning. Machine learning, which learns patterns from data, is itself a subset of the broader field of artificial intelligence."
+      },
+      {
+        "id": "q01-02",
+        "question": "A vendor claims their product uses 'artificial general intelligence' to diagnose cancer. What should your response be?",
+        "options": [
+          "Request a demo to evaluate the AGI capabilities",
+          "Ask for peer-reviewed validation studies of the AGI system",
+          "Recognize that AGI does not exist — all current AI is narrow and task-specific",
+          "Recommend the product to colleagues for early adoption"
+        ],
+        "correct": 2,
+        "explanation": "No artificial general intelligence system exists today. All deployed healthcare AI is narrow AI — designed for specific tasks within defined boundaries. A vendor claiming AGI is either misinformed or misleading."
+      },
+      {
+        "id": "q01-03",
+        "question": "What are the three fundamental components of any AI system?",
+        "options": [
+          "Hardware, software, and internet connectivity",
+          "Data, model, and infrastructure",
+          "Input, processing, and output",
+          "Training, testing, and deployment"
+        ],
+        "correct": 1,
+        "explanation": "Every AI system requires data (to learn from), a model (the mathematical structure that learns patterns), and infrastructure (the computing environment that runs it)."
+      },
+      {
+        "id": "q01-04",
+        "question": "When evaluating an AI tool for your oncology practice, what should be your first question?",
+        "options": [
+          "What is the price per user?",
+          "Is it FDA approved?",
+          "What data was this trained on?",
+          "Does it integrate with our EHR?"
+        ],
+        "correct": 2,
+        "explanation": "Training data determines an AI system's capabilities and limitations. If the training data doesn't represent your patient population, the model may not generalize to your practice. This is the most fundamental evaluation question."
+      },
+      {
+        "id": "q01-05",
+        "question": "Which three factors converged to make AI clinically relevant in the 2020s?",
+        "options": [
+          "Government mandates, vendor competition, and patient demand",
+          "Data availability, compute power, and model breakthroughs",
+          "5G networks, smartphone adoption, and telehealth expansion",
+          "EHR adoption, cloud computing, and blockchain"
+        ],
+        "correct": 1,
+        "explanation": "The digitization of healthcare created massive datasets, GPU computing made training economically feasible, and the transformer architecture (2017) enabled breakthrough capabilities in language and vision AI."
+      }
+    ],
+    "mod-02-ml-fundamentals": [
+      {
+        "id": "q02-01",
+        "question": "A model trained to identify pneumonia on chest X-rays using labeled examples of 'pneumonia' and 'no pneumonia' is an example of:",
+        "options": [
+          "Unsupervised learning",
+          "Reinforcement learning",
+          "Supervised learning",
+          "Transfer learning"
+        ],
+        "correct": 2,
+        "explanation": "Supervised learning uses labeled examples (input + correct output) to train a model. The labeled X-rays with diagnosis labels are the supervised training signal."
+      },
+      {
+        "id": "q02-02",
+        "question": "A vendor reports their AI tool has 95% accuracy for detecting a cancer that occurs in 2% of screened patients. What is the most important follow-up question?",
+        "options": [
+          "What is the model's AUC score?",
+          "What are the sensitivity and positive predictive value?",
+          "How many patients were in the test set?",
+          "Is the model FDA approved?"
+        ],
+        "correct": 1,
+        "explanation": "With a 2% disease prevalence, 95% accuracy could be achieved by simply predicting 'no cancer' for every patient. Sensitivity (does it catch actual cancers?) and PPV (when it flags cancer, is it right?) are far more informative than raw accuracy in imbalanced datasets."
+      },
+      {
+        "id": "q02-03",
+        "question": "What is 'data leakage' in the context of ML model evaluation?",
+        "options": [
+          "When patient data is accidentally shared with unauthorized parties",
+          "When information from the test set influences the training process",
+          "When the model's predictions are leaked to the public before publication",
+          "When training data is corrupted by missing values"
+        ],
+        "correct": 1,
+        "explanation": "Data leakage occurs when test data information contaminates training, artificially inflating performance metrics. A common example: the same patient appearing in both training and test sets."
+      },
+      {
+        "id": "q02-04",
+        "question": "In a cancer screening application, you would prioritize which metric?",
+        "options": [
+          "High specificity (minimize false positives)",
+          "High sensitivity (minimize missed cancers)",
+          "High accuracy (maximize overall correct predictions)",
+          "High F1 score (balance precision and recall)"
+        ],
+        "correct": 1,
+        "explanation": "In screening, the priority is not missing true cases (high sensitivity). A missed cancer has far worse consequences than a false alarm that leads to additional workup. The threshold should be set to maximize sensitivity, accepting some reduction in specificity."
+      },
+      {
+        "id": "q02-05",
+        "question": "A model achieves 99% accuracy on training data but only 60% on test data. This is most likely caused by:",
+        "options": [
+          "Insufficient training data",
+          "Overfitting — the model memorized training examples",
+          "An error in the model architecture",
+          "Biased test data"
+        ],
+        "correct": 1,
+        "explanation": "A large gap between training and test performance is the hallmark of overfitting. The model learned to memorize training examples rather than discover generalizable patterns."
+      }
+    ],
+    "mod-03-llms-clinical": [
+      {
+        "id": "q03-01",
+        "question": "What is 'hallucination' in the context of large language models?",
+        "options": [
+          "The model experiencing hardware errors that cause garbled output",
+          "The model generating fluent, confident text that is factually incorrect",
+          "The model refusing to answer clinical questions",
+          "The model producing output in the wrong language"
+        ],
+        "correct": 1,
+        "explanation": "Hallucination occurs when an LLM generates text that sounds authoritative but contains fabricated facts, citations, or recommendations. This is particularly dangerous in clinical settings."
+      },
+      {
+        "id": "q03-02",
+        "question": "Which strategy most effectively reduces LLM hallucination in clinical applications?",
+        "options": [
+          "Using larger models with more parameters",
+          "Retrieval-Augmented Generation (RAG) — grounding responses in verified source documents",
+          "Increasing the temperature parameter for more creative output",
+          "Training the model on more internet data"
+        ],
+        "correct": 1,
+        "explanation": "RAG forces the model to base its responses on retrieved, verified documents rather than relying on its parametric memory. This dramatically reduces hallucination by anchoring outputs to source material."
+      },
+      {
+        "id": "q03-03",
+        "question": "For generating clinical documentation, the LLM temperature should be set to:",
+        "options": [
+          "High (0.8-1.0) for creative and varied output",
+          "Medium (0.4-0.6) for balanced output",
+          "Low (0.0-0.3) for deterministic, factual output",
+          "Temperature does not affect clinical output quality"
+        ],
+        "correct": 2,
+        "explanation": "Low temperature produces more deterministic, factual output with less randomness. Clinical documentation requires accuracy and consistency, not creativity or variation."
+      },
+      {
+        "id": "q03-04",
+        "question": "Which of the following is the LOWEST-RISK clinical application of LLMs?",
+        "options": [
+          "Autonomous treatment recommendations",
+          "Drug dosing calculations",
+          "Translating clinical notes into patient-friendly language",
+          "Diagnostic decision-making"
+        ],
+        "correct": 2,
+        "explanation": "Patient communication translation is lower-risk because errors are less likely to cause direct harm (a clinician still manages the clinical decisions), and the task plays to LLMs' core strength in language transformation."
+      },
+      {
+        "id": "q03-05",
+        "question": "An LLM-based system generates a prior authorization appeal letter that cites a clinical trial you've never heard of. Your most appropriate response is:",
+        "options": [
+          "Submit the appeal — the AI likely found an obscure but valid trial",
+          "Verify the cited trial exists before submitting, as LLMs can fabricate citations",
+          "Assume the citation is correct since the AI was trained on medical literature",
+          "Remove the citation but keep the rest of the appeal unchanged"
+        ],
+        "correct": 1,
+        "explanation": "LLMs are known to fabricate citations, study names, and journal references. Any AI-generated clinical citation must be independently verified before use. This is a classic hallucination scenario."
+      }
+    ],
+    "mod-04-clinical-applications": [
+      {
+        "id": "q04-01",
+        "question": "AI-assisted pathology in oncology primarily uses which type of model architecture?",
+        "options": [
+          "Recurrent neural networks",
+          "Large language models",
+          "Convolutional neural networks (CNNs)",
+          "Decision trees"
+        ],
+        "correct": 2,
+        "explanation": "CNNs are designed for image analysis and are the predominant architecture for computational pathology, including tumor detection, grading, and biomarker quantification from whole-slide images."
+      },
+      {
+        "id": "q04-02",
+        "question": "Clinical trials matching AI can increase enrollment by:",
+        "options": [
+          "Automatically enrolling patients without consent",
+          "Scanning EHR data to identify eligible patients who might otherwise be missed",
+          "Relaxing eligibility criteria to include more patients",
+          "Replacing the IRB review process"
+        ],
+        "correct": 1,
+        "explanation": "AI clinical trials matching systems analyze patient records against trial eligibility criteria, identifying candidates that manual review might miss. This increases the pool of identified eligible patients without changing enrollment standards."
+      },
+      {
+        "id": "q04-03",
+        "question": "Genomic analysis AI in oncology is most valuable for:",
+        "options": [
+          "Replacing genetic counselors entirely",
+          "Identifying actionable mutations and matching them to targeted therapies",
+          "Predicting patient lifespan with certainty",
+          "Eliminating the need for tissue biopsies"
+        ],
+        "correct": 1,
+        "explanation": "AI-powered genomic analysis accelerates the identification of actionable mutations and maps them to approved or investigational targeted therapies, supporting precision oncology treatment decisions."
+      },
+      {
+        "id": "q04-04",
+        "question": "Real-world evidence (RWE) platforms use AI to:",
+        "options": [
+          "Replace randomized controlled trials",
+          "Analyze data from routine clinical practice to generate clinical insights",
+          "Fabricate evidence to support preferred treatments",
+          "Standardize treatment protocols across all institutions"
+        ],
+        "correct": 1,
+        "explanation": "RWE platforms apply AI to data from EHRs, claims, and registries — data generated during routine care — to identify treatment patterns, outcomes, and safety signals that complement traditional clinical trial evidence."
+      },
+      {
+        "id": "q04-05",
+        "question": "Which statement about AI-powered treatment planning in radiation oncology is correct?",
+        "options": [
+          "AI can fully replace the radiation oncologist in treatment planning",
+          "AI can automate contour delineation and optimize dose distribution, with physician review",
+          "AI treatment planning is not yet accurate enough for clinical use",
+          "AI planning is only useful for simple, single-field treatments"
+        ],
+        "correct": 1,
+        "explanation": "AI auto-contouring and dose optimization are FDA-cleared and in clinical use, significantly reducing planning time while maintaining quality. Physician review and approval remain required."
+      }
+    ],
+    "mod-05-regulatory": [
+      {
+        "id": "q05-01",
+        "question": "The FDA regulates clinical AI primarily under which category?",
+        "options": [
+          "Pharmaceutical drug regulation",
+          "Software as a Medical Device (SaMD)",
+          "Laboratory-developed tests (LDT)",
+          "General-purpose software exemption"
+        ],
+        "correct": 1,
+        "explanation": "The FDA classifies clinical AI as Software as a Medical Device (SaMD), with risk-based classification (Class I, II, or III) determining the level of regulatory oversight required."
+      },
+      {
+        "id": "q05-02",
+        "question": "Under HIPAA, using patient data to train an AI model requires:",
+        "options": [
+          "No special considerations — training is a treatment activity",
+          "Individual patient consent for every model",
+          "Appropriate safeguards including de-identification or a Business Associate Agreement covering the AI vendor",
+          "Only IRB approval"
+        ],
+        "correct": 2,
+        "explanation": "HIPAA requires that PHI used for AI training be either properly de-identified or that a BAA is in place with any third party accessing the data. The specific requirements depend on whether the use falls under treatment, operations, or research."
+      },
+      {
+        "id": "q05-03",
+        "question": "What is the FDA's 'predetermined change control plan' for AI/ML devices?",
+        "options": [
+          "A plan for recalling defective AI devices",
+          "A pre-approved framework allowing AI models to be updated post-market without new submissions for each change",
+          "A requirement to freeze all AI models permanently after approval",
+          "A plan for transferring AI devices between healthcare facilities"
+        ],
+        "correct": 1,
+        "explanation": "The predetermined change control plan allows manufacturers to describe anticipated modifications to their AI/ML algorithm in advance, enabling certain updates without requiring new regulatory submissions for each change."
+      },
+      {
+        "id": "q05-04",
+        "question": "A 'locked' AI algorithm, in FDA regulatory terms, means:",
+        "options": [
+          "The algorithm requires a password to access",
+          "The algorithm cannot be modified by the user",
+          "The algorithm produces the same output for the same input every time and does not learn continuously",
+          "The algorithm is encrypted for security"
+        ],
+        "correct": 2,
+        "explanation": "A 'locked' algorithm has fixed parameters — it doesn't continue learning from new data after deployment. This makes it easier to regulate because its behavior is predictable. 'Adaptive' algorithms that continuously learn present greater regulatory challenges."
+      },
+      {
+        "id": "q05-05",
+        "question": "Which statement about AI regulation in healthcare is most accurate?",
+        "options": [
+          "All clinical AI must be FDA approved before any use",
+          "The regulatory landscape is evolving, with gaps between FDA guidance and the pace of AI deployment",
+          "There are no regulations governing AI in healthcare",
+          "Only AI used for diagnosis is regulated; AI used for operations is exempt"
+        ],
+        "correct": 1,
+        "explanation": "AI regulation in healthcare is actively evolving. The FDA has cleared hundreds of AI/ML-enabled devices, but the pace of AI development outstrips regulatory framework development. Organizations must navigate ambiguity and build their own governance."
+      }
+    ],
+    "mod-06-implementation": [
+      {
+        "id": "q06-01",
+        "question": "The build vs. buy decision for clinical AI should primarily consider:",
+        "options": [
+          "Which option is cheapest in the first year",
+          "Whether the AI capability is a commodity or a source of competitive advantage",
+          "What other health systems are doing",
+          "Which option has the best marketing materials"
+        ],
+        "correct": 1,
+        "explanation": "If the AI capability is commodity (e.g., standard image classification), buying is usually right. If it's a source of competitive advantage or requires proprietary data (your patient population, your workflows), building or owning creates compounding value."
+      },
+      {
+        "id": "q06-02",
+        "question": "What is 'shadow deployment' in AI implementation?",
+        "options": [
+          "Deploying AI without telling the clinical staff",
+          "Running the AI system in parallel with existing workflows, using real data, without acting on its outputs",
+          "Using AI only during night shifts",
+          "Deploying an AI system that mimics a competitor's product"
+        ],
+        "correct": 1,
+        "explanation": "Shadow deployment runs the AI system on real clinical data alongside existing workflows. The AI produces outputs, but clinicians don't see or act on them. This allows real-world performance evaluation before clinical go-live."
+      },
+      {
+        "id": "q06-03",
+        "question": "The most common reason clinical AI implementations fail is:",
+        "options": [
+          "The AI model isn't accurate enough",
+          "Poor workflow integration and lack of clinical champion buy-in",
+          "Insufficient computing hardware",
+          "Regulatory barriers"
+        ],
+        "correct": 1,
+        "explanation": "Most failed AI implementations had technically adequate models. They failed because the AI didn't integrate into clinical workflows naturally, or because clinical staff weren't engaged in the design and rollout process."
+      },
+      {
+        "id": "q06-04",
+        "question": "ROI measurement for clinical AI should include:",
+        "options": [
+          "Only the direct cost savings from reduced staffing",
+          "Direct cost savings, indirect value (time savings, quality improvement), and implementation costs",
+          "Only the AI vendor's projected savings",
+          "Only the reduction in adverse events"
+        ],
+        "correct": 1,
+        "explanation": "Comprehensive ROI measurement must account for all costs (licensing, implementation, training, maintenance) against all value creation (direct savings, time freed for higher-value work, quality and safety improvements, patient experience gains)."
+      },
+      {
+        "id": "q06-05",
+        "question": "When evaluating an AI vendor for your oncology practice, the strongest disqualifying signal is:",
+        "options": [
+          "The vendor is a startup less than 5 years old",
+          "The vendor cannot provide external validation data or explain their training dataset",
+          "The product uses open-source AI models",
+          "The vendor's product is not yet FDA cleared"
+        ],
+        "correct": 1,
+        "explanation": "A vendor that cannot describe their training data or provide external validation results cannot demonstrate that their model will work for your patients. This is a fundamental credibility issue that supersedes company age, model choice, or regulatory status."
+      }
+    ],
+    "mod-07-ethics-bias": [
+      {
+        "id": "q07-01",
+        "question": "Algorithmic bias in clinical AI most commonly arises from:",
+        "options": [
+          "Intentional discrimination programmed by developers",
+          "Training data that doesn't represent all patient populations equally",
+          "Errors in the mathematical optimization process",
+          "Using AI models that are too complex"
+        ],
+        "correct": 1,
+        "explanation": "Bias typically enters through training data that overrepresents certain demographics and underrepresents others. If a model is trained primarily on data from academic medical centers, it may perform poorly for community practice patients with different demographics."
+      },
+      {
+        "id": "q07-02",
+        "question": "A dermatology AI trained primarily on images of light-skinned patients may:",
+        "options": [
+          "Perform equally well across all skin tones",
+          "Show reduced sensitivity for detecting lesions on darker skin tones",
+          "Be more accurate for darker skin tones due to greater contrast",
+          "Not be affected by skin tone variation"
+        ],
+        "correct": 1,
+        "explanation": "AI models perform best on data similar to their training set. A model trained predominantly on light-skinned images will have reduced sensitivity for darker skin tones, potentially missing diagnoses and exacerbating existing health disparities."
+      },
+      {
+        "id": "q07-03",
+        "question": "An AI governance framework for a health system should include:",
+        "options": [
+          "Only IT department review of AI tools",
+          "Multi-stakeholder oversight including clinical, ethical, legal, and technical review",
+          "Only the vendor's self-assessment",
+          "Only FDA clearance verification"
+        ],
+        "correct": 1,
+        "explanation": "Effective AI governance requires multidisciplinary oversight. Clinical experts assess utility, ethicists evaluate fairness and equity, legal reviews compliance, and technical teams evaluate performance and security."
+      },
+      {
+        "id": "q07-04",
+        "question": "Transparency in clinical AI means:",
+        "options": [
+          "Making all AI model source code publicly available",
+          "Ensuring clinicians and patients understand when AI is being used and how it influences decisions",
+          "Publishing the AI vendor's financial statements",
+          "Only using AI models that can explain every prediction in plain language"
+        ],
+        "correct": 1,
+        "explanation": "Clinical AI transparency means that clinicians know when AI is informing decisions, patients are aware of AI's role in their care, and the system's capabilities and limitations are clearly communicated."
+      },
+      {
+        "id": "q07-05",
+        "question": "If an AI system recommends different treatment approaches for patients with identical clinical profiles but different ZIP codes, this most likely represents:",
+        "options": [
+          "Appropriate personalization based on local resources",
+          "Proxy discrimination — ZIP code correlating with race or socioeconomic status",
+          "A random error in the model",
+          "Compliance with local treatment guidelines"
+        ],
+        "correct": 1,
+        "explanation": "ZIP code is a well-known proxy for race and socioeconomic status. An AI model using ZIP code to differentiate treatment recommendations is likely encoding and perpetuating existing disparities, even without explicitly using race as a variable."
+      }
+    ],
+    "mod-08-future": [
+      {
+        "id": "q08-01",
+        "question": "An 'AI agent' differs from a traditional AI tool in that it can:",
+        "options": [
+          "Provide more accurate predictions",
+          "Autonomously take actions and make decisions across multiple steps without human intervention at each step",
+          "Process larger datasets",
+          "Run on less powerful hardware"
+        ],
+        "correct": 1,
+        "explanation": "AI agents are autonomous — they can plan, execute multi-step workflows, use tools, and make decisions. Traditional AI tools perform single tasks (classify, predict, generate) and return output for human action."
+      },
+      {
+        "id": "q08-02",
+        "question": "The 'infrastructure ownership thesis' argues that health systems should:",
+        "options": [
+          "Purchase the most expensive AI tools available",
+          "Own their AI infrastructure rather than renting it from SaaS vendors, to build compounding advantage",
+          "Wait for AI technology to mature before investing",
+          "Outsource all AI capabilities to Big Tech companies"
+        ],
+        "correct": 1,
+        "explanation": "The ownership thesis holds that organizations controlling their own AI infrastructure — models, data pipelines, feedback loops — build compounding competitive advantage, while those renting capabilities from vendors reset with every contract cycle."
+      },
+      {
+        "id": "q08-03",
+        "question": "Which capability makes agentic AI particularly relevant for healthcare administration?",
+        "options": [
+          "The ability to process medical images",
+          "The ability to autonomously navigate multi-step workflows like prior authorization, claims, and scheduling",
+          "The ability to perform surgery",
+          "The ability to replace electronic health records"
+        ],
+        "correct": 1,
+        "explanation": "Healthcare administration involves complex, multi-step workflows with multiple systems (EHR, payer portals, scheduling systems). Agentic AI can navigate these workflows autonomously, reducing administrative burden on clinical staff."
+      },
+      {
+        "id": "q08-04",
+        "question": "The most significant risk of autonomous AI agents in healthcare is:",
+        "options": [
+          "They are too expensive to deploy",
+          "They may take clinical actions without appropriate human oversight",
+          "They require too much training data",
+          "They cannot integrate with existing EHR systems"
+        ],
+        "correct": 1,
+        "explanation": "The core risk of agentic AI is autonomy without oversight. If an agent takes a clinical action (modifying an order, sending a patient communication, submitting a claim) based on flawed reasoning, the error propagates without human interception."
+      },
+      {
+        "id": "q08-05",
+        "question": "To prepare for the next wave of AI in healthcare, organizations should prioritize:",
+        "options": [
+          "Purchasing every available AI tool immediately",
+          "Building clean data infrastructure, internal AI governance, and clinical workflow integration capabilities",
+          "Hiring as many data scientists as possible",
+          "Waiting until competitors have proven the technology"
+        ],
+        "correct": 1,
+        "explana                                                                                                                                                                                                                                                                                                      

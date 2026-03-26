@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+data/newsletter-sources/*.json
+*.log
+.DS_Store

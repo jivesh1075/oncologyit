@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.oncologyit.scrape-sources</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/jarvisamrahs/projects/oncologyit/scripts/scrape-sources.sh</string>
+    </array>
+    <!-- Daily at 4:00 AM CT -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>4</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>/Users/jarvisamrahs/logs/oncologyit-scrape.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/jarvisamrahs/logs/oncologyit-scrape-error.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin</string>
+        <key>MC_ENDPOINT</key>
+        <string>http://100.80.207.81:3777</string>
+    </dict>
+</dict>
+</plist>

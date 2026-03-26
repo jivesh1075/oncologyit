@@ -1,0 +1,522 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = (await getCollection('articles', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const featured = allArticles.find(a => a.data.featured) || allArticles[0];
+const recent = allArticles.filter(a => a.id !== featured?.id).slice(0, 4);
+
+const episodes = (await getCollection('podcast', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.episodeNumber - a.data.episodeNumber)
+  .slice(0, 3);
+
+const toolkitItems = (await getCollection('toolkit', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+
+const tagClass = (tag: string) => `tag-${tag}`;
+const shortDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+---
+<Base>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Independent analysis · Updated weekly</div>
+    <h1>Where Cancer Medicine<br>Meets <em>Technology</em></h1>
+    <p class="hero-sub">AI, health IT, and the systems reshaping oncology — analyzed by a practicing oncologist who builds the technology, not just writes about it.</p>
+    <div class="hero-author">
+      <div class="hero-avatar">JS</div>
+      <div class="hero-author-info">
+        <div class="hero-author-name">Jivesh Sharma, M.D.</div>
+        <div class="hero-author-title">Medical Oncologist · CEO, Nexgen Precision</div>
+      </div>
+    </div>
+    <div class="hero-cta-row">
+      <a href="/subscribe" class="btn-primary">Get the weekly dispatch</a>
+      <a href="/articles" class="btn-secondary">Read latest</a>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- WRITING -->
+  <div class="content-section" id="writing">
+    <div class="section-header">
+      <span class="section-label">Latest Writing</span>
+      <a href="/articles" class="section-more">Archive →</a>
+    </div>
+
+    {featured && (
+      <a href={`/articles/${featured.id}`} class="featured-article">
+        <div>
+          <div class="featured-label">Featured</div>
+          <h2>{featured.data.title}</h2>
+          <p>{featured.data.description}</p>
+          <div class="article-meta">
+            {shortDate(featured.data.date)} · {featured.data.readTime || '5 min read'}
+          </div>
+        </div>
+        <div class="featured-visual">
+          <div class="featured-visual-inner">→</div>
+        </div>
+      </a>
+    )}
+
+    <div class="articles-list">
+      {recent.map((article) => (
+        <a href={`/articles/${article.id}`} class="article-row">
+          <span class="article-date">{shortDate(article.data.date)}</span>
+          <div class="article-content">
+            <h3>{article.data.title}</h3>
+            <p>{article.data.description}</p>
+          </div>
+          <span class={`tag-pill ${tagClass(article.data.tag)}`}>
+            {article.data.tag.replace('-', ' ')}
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- PODCAST -->
+  {episodes.length > 0 && (
+    <section class="podcast-band">
+      <div class="podcast-inner">
+        <div class="section-header">
+          <span class="section-label">OncoTech AI Podcast</span>
+          <a href="/podcast" class="section-more">All episodes →</a>
+        </div>
+        <div class="podcast-grid">
+          {episodes.map((ep) => (
+            <a href={`/podcast/${ep.id}`} class="ep-card">
+              <div class="ep-num">EP {String(ep.data.episodeNumber).padStart(3, '0')}</div>
+              <h4>{ep.data.title}</h4>
+              <p>{ep.data.description}</p>
+              <div class="ep-time">
+                <span class="play-icon">
+                  <svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg>
+                </span>
+                {ep.data.duration}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- TOOLKIT -->
+  {toolkitItems.length > 0 && (
+    <div class="content-section" id="toolkit-section">
+      <div class="section-header">
+        <span class="section-label">Toolkit &amp; Resources</span>
+        <a href="/toolkit" class="section-more">Browse all →</a>
+      </div>
+      <div class="toolkit-grid">
+        {toolkitItems.slice(0, 4).map((item) => {
+          const icons = { books: '📚', tools: '⚙️', education: '🎓', frameworks: '📋' };
+          const badgeClass = {
+            books: 'badge-books', tools: 'badge-tools',
+            education: 'badge-learn', frameworks: 'badge-download'
+          };
+          return (
+            <a href={item.data.affiliateUrl || item.data.url || `/toolkit#${item.id}`} class="tk-card" target={item.data.affiliateUrl ? '_blank' : undefined} rel={item.data.affiliateUrl ? 'noopener sponsored' : undefined}>
+              <div class="tk-icon">{icons[item.data.category] || '📦'}</div>
+              <h4>{item.data.title}</h4>
+              <p>{item.data.description}</p>
+              <span class={`tk-badge ${badgeClass[item.data.category] || ''}`}>{item.data.category}</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  )}
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <h2>The weekly <em>signal</em> in<br>oncology technology.</h2>
+    <p>One dispatch per week. No vendor spin. What's actually changing in cancer care, AI, and health IT.</p>
+    <form class="nl-form" action="/api/subscribe" method="POST">
+      <input type="email" name="email" placeholder="you@hospital.org" required>
+      <button type="submit" class="btn-accent">Subscribe</button>
+    </form>
+    <div class="nl-note">Free. Unsubscribe anytime. No spam, ever.</div>
+  </section>
+</Base>
+
+<style>
+/* ─── HERO ─── */
+.hero {
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 8rem 2rem 4rem;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  background: var(--teal-light);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.5s ease both;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  max-width: 780px;
+  animation: fadeUp 0.5s ease 0.08s both;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.hero-sub {
+  margin-top: 1.75rem;
+  font-size: 1.15rem;
+  color: var(--text-dim);
+  max-width: 520px;
+  line-height: 1.7;
+  animation: fadeUp 0.5s ease 0.16s both;
+}
+.hero-author {
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  animation: fadeUp 0.5s ease 0.24s both;
+}
+.hero-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent) 0%, #e07040 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+}
+.hero-author-info { text-align: left; }
+.hero-author-name { font-weight: 700; font-size: 0.95rem; }
+.hero-author-title { font-size: 0.82rem; color: var(--text-dim); }
+.hero-cta-row {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  animation: fadeUp 0.5s ease 0.32s both;
+}
+
+/* ─── CONTENT SECTION ─── */
+.content-section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+/* ─── FEATURED ARTICLE ─── */
+.featured-article {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 3rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  text-decoration: none !important;
+  color: var(--text);
+  transition: all 0.3s;
+}
+.featured-article:hover {
+  border-color: var(--accent-border);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+.featured-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+.featured-article h2 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.featured-article p {
+  font-size: 1rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+.article-meta {
+  margin-top: 1.5rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.featured-visual {
+  background: linear-gradient(145deg, var(--bg-warm) 0%, #ede8df 100%);
+  border-radius: 8px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.featured-visual-inner {
+  font-family: var(--serif);
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(0,0,0,0.04);
+}
+.featured-visual::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  background-image: radial-gradient(var(--accent) 1.5px, transparent 1.5px);
+  background-size: 12px 12px;
+  opacity: 0.3;
+}
+
+/* ─── ARTICLES LIST ─── */
+.articles-list { display: flex; flex-direction: column; }
+.article-row {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 2rem;
+  align-items: baseline;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none !important;
+  color: var(--text);
+  transition: background 0.2s;
+}
+.article-row:first-child { border-top: 1px solid var(--border); }
+.article-row:hover { background: rgba(0,0,0,0.015); }
+.article-date {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  padding-top: 0.2rem;
+}
+.article-content h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.01em;
+}
+.article-content p {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+  max-width: 600px;
+}
+
+/* ─── PODCAST ─── */
+.podcast-band {
+  background: var(--bg-dark);
+  color: #e4e7ee;
+  padding: 5rem 2rem;
+}
+.podcast-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.podcast-band .section-label { color: rgba(255,255,255,0.35); }
+.podcast-band .section-more { color: rgba(255,255,255,0.5); }
+.podcast-band .section-more:hover { color: #fff; text-decoration: none; }
+.podcast-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.25rem;
+}
+.ep-card {
+  display: block;
+  padding: 2rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  transition: all 0.3s;
+  text-decoration: none !important;
+  color: #e4e7ee;
+}
+.ep-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+}
+.ep-num {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+.ep-card h4 {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+.ep-card p {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.55;
+}
+.ep-time {
+  margin-top: 1.25rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.play-icon {
+  display: inline-flex;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  align-items: center;
+  justify-content: center;
+}
+.play-icon svg { width: 10px; height: 10px; fill: #fff; margin-left: 1px; }
+
+/* ─── TOOLKIT ─── */
+.toolkit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+.tk-card {
+  display: block;
+  padding: 2rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: all 0.3s;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  text-decoration: none !important;
+  color: var(--text);
+}
+.tk-card:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+.tk-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+.tk-card h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.35rem; }
+.tk-card p { font-size: 0.78rem; color: var(--text-dim); line-height: 1.55; }
+.tk-badge {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+}
+.badge-books { background: var(--accent-light); color: var(--accent); }
+.badge-tools { background: var(--teal-light); color: var(--teal); }
+.badge-learn { background: var(--purple-light); color: var(--purple); }
+.badge-download { background: rgba(40,40,40,0.06); color: var(--text-dim); }
+
+/* ─── NEWSLETTER ─── */
+.newsletter-section {
+  padding: 6rem 2rem;
+  text-align: center;
+  background: var(--bg-warm);
+}
+.newsletter-section h2 {
+  font-family: var(--serif);
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+.newsletter-section h2 em { color: var(--accent); font-style: italic; font-weight: 400; }
+.newsletter-section > p {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  max-width: 440px;
+  margin: 0 auto 2.5rem;
+}
+.nl-form {
+  display: flex;
+  gap: 0.6rem;
+  max-width: 440px;
+  margin: 0 auto;
+}
+.nl-form input {
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 100px;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  background: var(--bg-card);
+  outline: none;
+  transition: border-color 0.25s;
+}
+.nl-form input:focus { border-color: var(--accent); }
+.nl-form input::placeholder { color: var(--text-muted); }
+.nl-note {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .hero { padding: 7rem 1.5rem 3rem; }
+  .hero h1 { font-size: 2.4rem; }
+  .featured-article { grid-template-columns: 1fr; }
+  .featured-visual { display: none; }
+  .article-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .article-date, .article-row .tag-pill { display: none; }
+  .podcast-grid { grid-template-columns: 1fr; }
+  .toolkit-grid { grid-template-columns: 1fr 1fr; }
+  .nl-form { flex-direction: column; }
+  .hero-cta-row { flex-direction: column; align-items: center; }
+}
+</style>
