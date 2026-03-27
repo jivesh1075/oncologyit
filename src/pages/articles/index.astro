@@ -7,6 +7,7 @@ const articles = (await getCollection('articles', ({ data }) => !data.draft))
 
 const tagClass = (tag: string) => `tag-${tag}`;
 const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const slug = (id: string) => id.replace(/\.md$/, '');
 ---
 <Base title="Writing — OncologyIT" description="Analysis on AI, health IT, and oncology technology.">
   <div class="page-wrapper">
@@ -16,7 +17,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', mo
     </header>
     <div class="articles-list">
       {articles.map((article) => (
-        <a href={`/articles/${article.id}`} class="article-row">
+        <a href={`/articles/${slug(article.id)}`} class="article-row">
           <span class="article-date">{fmtDate(article.data.date)}</span>
           <div class="article-content">
             <h3>{article.data.title}</h3>

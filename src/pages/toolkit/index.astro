@@ -1,0 +1,164 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+const toolkitItems = (await getCollection('toolkit', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+const slug = (id: string) => id.replace(/\.md$/, '');
+
+const categories = [
+  { key: 'books', label: 'Essential Reading', icon: '📚', badge: 'badge-books' },
+  { key: 'tools', label: 'Tools & Platforms', icon: '⚙️', badge: 'badge-tools' },
+  { key: 'education', label: 'Learning Paths', icon: '🎓', badge: 'badge-learn' },
+  { key: 'frameworks', label: 'Frameworks & Playbooks', icon: '📋', badge: 'badge-download' },
+];
+
+// Group items by category
+const grouped = categories.map(cat => ({
+  ...cat,
+  items: toolkitItems.filter(item => item.data.category === cat.key),
+})).filter(cat => cat.items.length > 0);
+---
+<Base title="Toolkit — OncologyIT" description="Curated resources, tools, and frameworks for clinical leaders navigating AI in oncology.">
+  <div class="page-wrapper">
+    <header class="page-header">
+      <h1>Toolkit &amp; Resources</h1>
+      <p>Curated tools, reading, and frameworks for clinical leaders navigating the AI transition in oncology.</p>
+    </header>
+
+    <nav class="cat-nav">
+      {grouped.map(cat => (
+        <a href={`#${cat.key}`} class="cat-link">
+          <span class="cat-icon">{cat.icon}</span>
+          {cat.label}
+        </a>
+      ))}
+    </nav>
+
+    {grouped.map(cat => (
+      <section class="tk-section" id={cat.key}>
+        <div class="section-header">
+          <span class="section-label">{cat.icon} {cat.label}</span>
+        </div>
+        <div class="tk-grid">
+          {cat.items.map((item) => (
+            <a
+              href={item.data.affiliateUrl || item.data.url || `#${slug(item.id)}`}
+              class="tk-card"
+              target={item.data.affiliateUrl ? '_blank' : undefined}
+              rel={item.data.affiliateUrl ? 'noopener sponsored' : undefined}
+              id={slug(item.id)}
+            >
+              <h4>{item.data.title}</h4>
+              <p>{item.data.description}</p>
+              <span class={`tk-badge ${cat.badge}`}>{item.data.category}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</Base>
+
+<style>
+.page-wrapper {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 8rem 2rem 5rem;
+}
+.page-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.page-header h1 {
+  font-family: var(--serif);
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.page-header p {
+  margin-top: 0.75rem;
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.65;
+}
+.cat-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+}
+.cat-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  text-decoration: none !important;
+  transition: all 0.2s;
+}
+.cat-link:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+  text-decoration: none;
+}
+.cat-icon { font-size: 1rem; }
+.tk-section { margin-bottom: 3.5rem; }
+.tk-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+.tk-card {
+  display: block;
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: all 0.3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  text-decoration: none !important;
+  color: var(--text);
+}
+.tk-card:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+.tk-card h4 {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.tk-card p {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.tk-badge {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+}
+.badge-books { background: var(--accent-light); color: var(--accent); }
+.badge-tools { background: var(--teal-light); color: var(--teal); }
+.badge-learn { background: var(--purple-light); color: var(--purple); }
+.badge-download { background: rgba(40,40,40,0.06); color: var(--text-dim); }
+@media (max-width: 900px) {
+  .tk-grid { grid-template-columns: 1fr; }
+}
+</style>

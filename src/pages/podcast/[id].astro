@@ -1,0 +1,158 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const episodes = await getCollection('podcast');
+  return episodes.map((ep) => ({
+    params: { id: ep.id.replace(/\.md$/, '') },
+    props: { episode: ep },
+  }));
+}
+
+const { episode } = Astro.props;
+const { Content } = await render(episode);
+
+const dateStr = new Date(episode.data.date).toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric'
+});
+---
+<Base title={`${episode.data.title} — OncologyIT Podcast`} description={episode.data.description}>
+  <article class="episode-page">
+    <header class="episode-header">
+      <div class="episode-header-inner">
+        <a href="/podcast" class="back-link">← All Episodes</a>
+        <div class="ep-badge">EP {String(episode.data.episodeNumber).padStart(3, '0')}</div>
+        <h1>{episode.data.title}</h1>
+        <p class="episode-desc">{episode.data.description}</p>
+        <div class="episode-meta-row">
+          <span>Jivesh Sharma, M.D.</span>
+          <span class="sep">·</span>
+          <span>{dateStr}</span>
+          <span class="sep">·</span>
+          <span>{episode.data.duration}</span>
+        </div>
+        {episode.data.audioUrl && (
+          <div class="audio-player">
+            <audio controls preload="metadata">
+              <source src={episode.data.audioUrl} type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        )}
+        {!episode.data.audioUrl && (
+          <div class="audio-placeholder">
+            <div class="play-icon-lg">
+              <svg viewBox="0 0 10 12"><polygon points="0,0 10,6 0,12"/></svg>
+            </div>
+            <span>Episode audio coming soon</span>
+          </div>
+        )}
+      </div>
+    </header>
+    <div class="episode-body">
+      <div class="prose">
+        <h2>Show Notes</h2>
+        <Content />
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+.episode-page { padding-top: 5rem; }
+.episode-header {
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.episode-header-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.back-link {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+  text-decoration: none;
+}
+.back-link:hover { color: var(--accent); text-decoration: none; }
+.ep-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 0.35rem 0.85rem;
+  border-radius: 100px;
+  margin-bottom: 1.25rem;
+}
+.episode-header h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+.episode-desc {
+  font-size: 1.15rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.episode-meta-row {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.sep { color: var(--border-strong); }
+.audio-player {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.audio-player audio {
+  width: 100%;
+  border-radius: 100px;
+}
+.audio-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: var(--bg-warm);
+  border-radius: 100px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+.audio-placeholder span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.play-icon-lg {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.play-icon-lg svg { width: 12px; height: 12px; fill: #fff; margin-left: 2px; }
+.episode-body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+}
+</style>

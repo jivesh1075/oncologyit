@@ -17,6 +17,7 @@ const toolkitItems = (await getCollection('toolkit', ({ data }) => !data.draft))
 
 const tagClass = (tag: string) => `tag-${tag}`;
 const shortDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+const slug = (id: string) => id.replace(/\.md$/, '');
 ---
 <Base>
   <!-- HERO -->
@@ -47,7 +48,7 @@ const shortDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', d
     </div>
 
     {featured && (
-      <a href={`/articles/${featured.id}`} class="featured-article">
+      <a href={`/articles/${slug(featured.id)}`} class="featured-article">
         <div>
           <div class="featured-label">Featured</div>
           <h2>{featured.data.title}</h2>
@@ -64,7 +65,7 @@ const shortDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', d
 
     <div class="articles-list">
       {recent.map((article) => (
-        <a href={`/articles/${article.id}`} class="article-row">
+        <a href={`/articles/${slug(article.id)}`} class="article-row">
           <span class="article-date">{shortDate(article.data.date)}</span>
           <div class="article-content">
             <h3>{article.data.title}</h3>
@@ -88,7 +89,7 @@ const shortDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', d
         </div>
         <div class="podcast-grid">
           {episodes.map((ep) => (
-            <a href={`/podcast/${ep.id}`} class="ep-card">
+            <a href={`/podcast/${slug(ep.id)}`} class="ep-card">
               <div class="ep-num">EP {String(ep.data.episodeNumber).padStart(3, '0')}</div>
               <h4>{ep.data.title}</h4>
               <p>{ep.data.description}</p>
@@ -120,7 +121,7 @@ const shortDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', d
             education: 'badge-learn', frameworks: 'badge-download'
           };
           return (
-            <a href={item.data.affiliateUrl || item.data.url || `/toolkit#${item.id}`} class="tk-card" target={item.data.affiliateUrl ? '_blank' : undefined} rel={item.data.affiliateUrl ? 'noopener sponsored' : undefined}>
+            <a href={item.data.affiliateUrl || item.data.url || `/toolkit#${slug(item.id)}`} class="tk-card" target={item.data.affiliateUrl ? '_blank' : undefined} rel={item.data.affiliateUrl ? 'noopener sponsored' : undefined}>
               <div class="tk-icon">{icons[item.data.category] || '📦'}</div>
               <h4>{item.data.title}</h4>
               <p>{item.data.description}</p>
