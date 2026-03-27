@@ -1,0 +1,30 @@
+{
+  "rewrites": [
+    {
+      "source": "/vendors",
+      "destination": "/vendors/index.html"
+    },
+    {
+      "source": "/vendors/",
+      "destination": "/vendors/index.html"
+    },
+    {
+      "source": "/news",
+      "destination": "/news/index.html"
+    },
+    {
+      "source": "/news/",
+      "destination": "/news/index.html"
+    },
+    {
+      "source": "/vendors/:vendor",
+      "destination": "/vendors/:vendor/index.html"
+    },
+    {
+      "source": "/vendors/:category",
+      "destination": "/vendors/:category/index.html"
+    }
+  ],
+  "trailingSlash": false,
+  "cleanUrls": true
+}
