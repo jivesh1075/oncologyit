@@ -1,0 +1,100 @@
+---
+import type { Category } from '../types/vendor';
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props;
+---
+
+<a href={`/vendors/${category.id}`} class="category-card">
+  <div class="category-icon">{category.icon}</div>
+  <div class="category-content">
+    <h3 class="category-name">{category.name}</h3>
+    <p class="category-description">{category.description}</p>
+    <div class="category-count">{category.vendorCount} vendor{category.vendorCount !== 1 ? 's' : ''}</div>
+  </div>
+  <div class="category-arrow">→</div>
+</a>
+
+<style>
+  .category-card {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid transparent;
+  }
+  
+  .category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-color: var(--primary);
+  }
+  
+  .category-icon {
+    font-size: 2rem;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+  }
+  
+  .category-content {
+    flex: 1;
+  }
+  
+  .category-name {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+  
+  .category-description {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+  
+  .category-count {
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 500;
+  }
+  
+  .category-arrow {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    opacity: 0.5;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  
+  .category-card:hover .category-arrow {
+    transform: translateX(4px);
+    opacity: 1;
+    color: var(--primary);
+  }
+  
+  @media (max-width: 768px) {
+    .category-card {
+      flex-direction: column;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+    
+    .category-icon {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+    
+    .category-arrow {
+      display: none;
+    }
+  }
+</style>

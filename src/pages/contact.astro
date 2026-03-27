@@ -1,0 +1,225 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Contact" 
+  description="Contact information for OncologyIT.com">
+  
+  <div class="page-header">
+    <h1>Contact Us</h1>
+    <p class="subtitle">
+      Get in touch with questions, suggestions, or feedback about the OncologyIT.com directory
+    </p>
+  </div>
+
+  <div class="contact-content">
+    <div class="contact-info">
+      <div class="info-card">
+        <div class="info-icon">📧</div>
+        <h3>General Inquiries</h3>
+        <p>
+          For general questions about the directory, vendor submissions, or partnership opportunities.
+        </p>
+        <p class="info-detail">
+          Email: <a href="mailto:info@oncologyit.com">info@oncologyit.com</a>
+        </p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">🔍</div>
+        <h3>Vendor Information</h3>
+        <p>
+          To suggest a vendor for inclusion, report inaccurate information, or provide updates about a vendor profile.
+        </p>
+        <p class="info-detail">
+          Email: <a href="mailto:vendors@oncologyit.com">vendors@oncologyit.com</a>
+        </p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">🤝</div>
+        <h3>Partnerships</h3>
+        <p>
+          For business development, content partnerships, or integration opportunities.
+        </p>
+        <p class="info-detail">
+          Email: <a href="mailto:partnerships@oncologyit.com">partnerships@oncologyit.com</a>
+        </p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">💡</div>
+        <h3>Feedback & Suggestions</h3>
+        <p>
+          We welcome feedback about the directory and suggestions for new features or improvements.
+        </p>
+        <p class="info-detail">
+          Email: <a href="mailto:feedback@oncologyit.com">feedback@oncologyit.com</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="about-contact">
+      <h2>About Our Team</h2>
+      <p>
+        OncologyIT.com is maintained by the <strong>Sharma Swarm</strong> initiative, 
+        a collaborative effort to build AI-native tools and resources for healthcare 
+        technology evaluation and adoption.
+      </p>
+      <p>
+        Our team combines AI automation with human expertise to maintain accurate, 
+        up-to-date information about oncology technology vendors. We're constantly 
+        working to improve the directory and add new features to better serve the 
+        oncology community.
+      </p>
+      <p>
+        While we don't have a physical office location, we're responsive to email 
+        inquiries and value all feedback from our users.
+      </p>
+      
+      <div class="contact-note">
+        <h3>Response Time</h3>
+        <p>
+          We strive to respond to all inquiries within 2-3 business days. For urgent 
+          matters, please include "URGENT" in your email subject line.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    
+    .contact-info {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .info-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+    
+    .info-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .info-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    
+    .info-card p {
+      line-height: 1.6;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+    
+    .info-detail {
+      font-weight: 500;
+      color: var(--text) !important;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .info-detail a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .info-detail a:hover {
+      text-decoration: underline;
+    }
+    
+    .about-contact {
+      background: white;
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+    
+    .about-contact h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+    
+    .about-contact p {
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    
+    strong {
+      color: var(--text);
+    }
+    
+    .contact-note {
+      background: var(--secondary);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .contact-note h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    
+    .contact-note p {
+      margin-bottom: 0;
+      color: var(--text-light);
+    }
+    
+    @media (max-width: 1024px) {
+      .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      
+      .subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .contact-info {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Layout>
