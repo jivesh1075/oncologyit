@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://www.oncologyit.com'
+  site: 'https://www.oncologyit.com',
+  base: '/'
 });
