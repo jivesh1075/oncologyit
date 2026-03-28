@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Privacy Policy" 
+  description="Privacy policy for OncologyIT.com">
+  
+  <div class="page-header">
+    <h1>Privacy Policy</h1>
+    <p class="subtitle">Last updated: March 2026</p>
+  </div>
+
+  <div class="content">
+    <section>
+      <h2>Information We Collect</h2>
+      <p>
+        OncologyIT.com is a public directory website that does not require user accounts 
+        or collect personal information for general browsing. We may collect:
+      </p>
+      <ul>
+        <li><strong>Anonymous usage data:</strong> Basic analytics about page views and visitor behavior</li>
+        <li><strong>Technical information:</strong> Browser type, device type, and general location (country/region level)</li>
+        <li><strong>Referral data:</strong> How visitors found our website</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>How We Use Information</h2>
+      <p>
+        We use collected information to:
+      </p>
+      <ul>
+        <li>Improve website performance and user experience</li>
+        <li>Understand which content is most valuable to visitors</li>
+        <li>Identify technical issues that need to be addressed</li>
+        <li>Make decisions about future content and features</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Third-Party Services</h2>
+      <p>
+        We may use third-party services that collect information:
+      </p>
+      <ul>
+        <li><strong>Analytics services:</strong> To understand website usage patterns</li>
+        <li><strong>Hosting providers:</strong> To serve website content</li>
+        <li><strong>Content delivery networks:</strong> To improve website performance</li>
+      </ul>
+      <p>
+        These services have their own privacy policies governing how they handle data.
+      </p>
+    </section>
+
+    <section>
+      <h2>External Links</h2>
+      <p>
+        Our website contains links to external vendor websites. We are not responsible for 
+        the privacy practices or content of these external sites. We encourage you to review 
+        the privacy policies of any website you visit through our links.
+      </p>
+    </section>
+
+    <section>
+      <h2>Data Security</h2>
+      <p>
+        We implement reasonable security measures to protect against unauthorized access 
+        to or unauthorized alteration, disclosure, or destruction of data. However, no 
+        internet transmission is completely secure, and we cannot guarantee the security 
+        of information transmitted to or from our website.
+      </p>
+    </section>
+
+    <section>
+      <h2>Changes to This Policy</h2>
+      <p>
+        We may update this privacy policy from time to time. We will notify users of 
+        any material changes by posting the new privacy policy on this page and updating 
+        the "Last updated" date.
+      </p>
+    </section>
+
+    <section>
+      <h2>Contact Us</h2>
+      <p>
+        If you have questions about this privacy policy, please contact us through 
+        our <a href="/contact">contact page</a>.
+      </p>
+    </section>
+  </div>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-light);
+    }
+    
+    .content {
+      background: white;
+      border-radius: var(--radius);
+      padding: 3rem;
+      box-shadow: var(--shadow);
+    }
+    
+    section {
+      margin-bottom: 3rem;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    p {
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    
+    li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--text);
+    }
+    
+    li:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+    
+    strong {
+      color: var(--text);
+    }
+    
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      
+      .content {
+        padding: 2rem;
+      }
+    }
+  </style>
+</Layout>
