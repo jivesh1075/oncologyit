@@ -7,3 +7,4 @@ dist/
 data/newsletter-sources/*.json
 *.log
 .DS_Store
+.vercel
