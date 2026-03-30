@@ -1,15 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getVendorById } from '../../data/vendors';
+import { VENDORS, getVendorById } from '../../data/vendors';
 
 export async function getStaticPaths() {
-  const vendors = [
-    { params: { vendor: 'epic-systems' } },
-    { params: { vendor: 'varian-medical' } },
-    { params: { vendor: 'tempus' } },
-    { params: { vendor: 'flatiron-health' } }
-  ];
-  return vendors;
+  return VENDORS.map(v => ({ params: { vendor: v.id } }));
 }
 
 const { vendor } = Astro.params;
