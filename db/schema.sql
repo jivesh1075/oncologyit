@@ -113,3 +113,49 @@ CREATE TABLE IF NOT EXISTS bot_activity (
 );
 
 CREATE INDEX idx_bot_activity_date ON bot_activity(created_at);
+
+-- ─── HIPAA AUDIT LOG ───
+-- 45 CFR § 164.312(b) — Immutable audit trail for PHI access events
+CREATE TABLE IF NOT EXISTS hipaa_audit_log (
+  id          SERIAL PRIMARY KEY,
+  timestamp   TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  user_id     VARCHAR(255) NOT NULL,
+  action      VARCHAR(20) NOT NULL,     -- 'VIEW' | 'CREATE' | 'UPDATE' | 'DELETE' | 'EXPORT' | 'VALIDATE'
+  resource_type VARCHAR(100) NOT NULL,
+  resource_id VARCHAR(255) NOT NULL,
+  patient_id  VARCHAR(255),
+  ip_address  VARCHAR(45),
+  user_agent  VARCHAR(500),
+  outcome     VARCHAR(20) NOT NULL,     -- 'SUCCESS' | 'FAILURE' | 'DENIED'
+  details     TEXT
+);
+
+CREATE INDEX idx_audit_timestamp ON hipaa_audit_log(timestamp);
+CREATE INDEX idx_audit_user ON hipaa_audit_log(user_id);
+CREATE INDEX idx_audit_patient ON hipaa_audit_log(patient_id);
+
+-- ─── SAVED ARTICLES ───
+CREATE TABLE IF NOT EXISTS saved_articles (
+  id          SERIAL PRIMARY KEY,
+  user_id     INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  article_slug VARCHAR(255) NOT NULL,
+  saved_at    TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, article_slug)
+);
+
+CREATE INDEX idx_saved_user ON saved_articles(user_id);
+
+-- ─── SEARCH CONTENT (for pgvector semantic search) ───
+-- Enable the extension: CREATE EXTENSION IF NOT EXISTS vector;
+-- CREATE TABLE IF NOT EXISTS search_content (
+--   id          SERIAL PRIMARY KEY,
+--   content_type VARCHAR(50) NOT NULL,
+--   content_id  VARCHAR(255) NOT NULL,
+--   title       TEXT NOT NULL,
+--   description TEXT,
+--   content     TEXT,
+--   embedding   vector(1536),
+--   updated_at  TIMESTAMPTZ DEFAULT NOW(),
+--   UNIQUE(content_type, content_id)
+-- );
+-- CREATE INDEX idx_search_embedding ON search_content USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
