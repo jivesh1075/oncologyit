@@ -18,7 +18,9 @@ export const CATEGORIES = [
   { id: 'ehr-emr', name: 'EHR/EMR Systems', description: 'Electronic health record systems for oncology' },
   { id: 'radiation-oncology', name: 'Radiation Oncology', description: 'Radiation therapy technology and software' },
   { id: 'genomics-precision-medicine', name: 'Genomics & Precision Medicine', description: 'Genomic testing and AI-driven precision medicine' },
-  { id: 'clinical-analytics', name: 'Clinical Analytics', description: 'Real-world evidence and clinical data analytics' }
+  { id: 'clinical-analytics', name: 'Clinical Analytics', description: 'Real-world evidence and clinical data analytics' },
+  { id: 'practice-management', name: 'Practice Management', description: 'Revenue cycle management and practice operations software' },
+  { id: 'digital-pathology', name: 'Digital Pathology', description: 'AI-powered pathology and diagnostic imaging solutions' }
 ];
 
 export const VENDORS: Vendor[] = [
@@ -77,6 +79,48 @@ export const VENDORS: Vendor[] = [
     oncologyFocus: ['Real-world evidence', 'Clinical analytics', 'EHR data aggregation'],
     keyProducts: ['OncoEMR', 'Flatiron Platform', 'Flatiron Clinical Pipe', 'Flatiron Trials'],
     recentDevelopments: ['Roche integration', 'Horizon Datascapes launch', '2,000+ publications']
+  },
+  {
+    id: 'nextech',
+    name: 'Nextech',
+    category: 'practice-management',
+    description: 'Comprehensive practice management and EHR solution specifically designed for specialty practices including oncology, dermatology, and ophthalmology.',
+    website: 'https://www.nextech.com',
+    founded: 1997,
+    headquarters: 'Tampa, Florida',
+    employees: '1,200+',
+    revenue: '$300M+ (2024 est.)',
+    oncologyFocus: ['Oncology practice management', 'Revenue cycle management', 'Clinical documentation'],
+    keyProducts: ['Nextech EHR', 'Nextech Practice Management', 'Nextech Interoperability', 'Nextech Analytics'],
+    recentDevelopments: ['Private equity acquisition by TPG', 'AI-powered documentation tools', 'Enhanced telehealth capabilities']
+  },
+  {
+    id: 'pathai',
+    name: 'PathAI',
+    category: 'digital-pathology',
+    description: 'AI-powered digital pathology platform that enhances diagnostic accuracy and accelerates drug development in oncology through advanced image analysis.',
+    website: 'https://www.pathai.com',
+    founded: 2016,
+    headquarters: 'Boston, Massachusetts',
+    employees: '400+',
+    revenue: '$100M+ (2024 est.)',
+    oncologyFocus: ['Digital pathology', 'AI diagnostics', 'Biomarker discovery', 'Clinical trial enrichment'],
+    keyProducts: ['PathAI Platform', 'AIM-PD-L1', 'AIM-HER2', 'PathExplore'],
+    recentDevelopments: ['FDA clearance for AI algorithms', 'Major pharma partnerships', '$100M+ Series D funding']
+  },
+  {
+    id: 'navigating-cancer',
+    name: 'Navigating Cancer',
+    category: 'practice-management',
+    description: 'Patient engagement platform specifically designed for oncology practices, improving patient experience and clinical outcomes through digital navigation.',
+    website: 'https://www.navigatingcancer.com',
+    founded: 2008,
+    headquarters: 'Seattle, Washington',
+    employees: '200+',
+    revenue: '$50M+ (2024 est.)',
+    oncologyFocus: ['Patient navigation', 'Symptom management', 'Remote monitoring', 'Care coordination'],
+    keyProducts: ['Patient Relationship Management', 'Symptom Care Management', 'Clinical Trials Matching', 'Patient Education'],
+    recentDevelopments: ['Partnership with Epic Systems', 'Expansion to 500+ cancer centers', 'AI-driven symptom prediction']
   }
 ];
 
