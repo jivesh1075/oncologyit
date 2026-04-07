@@ -178,12 +178,15 @@ export interface Vendor {
   name: string;
   category: string;
   description: string;
-  founded?: string;
-  hq?: string;
-  website?: string;
+  website: string;
+  founded: number;
+  headquarters: string;
+  employees: string;
+  revenue: string;
+  oncologyFocus: string[];
+  keyProducts: string[];
+  recentDevelopments: string[];
   featured?: boolean;
-  focusAreas?: string[];
-  keyProducts?: string[];
 }
 
 export interface VendorCategory {
