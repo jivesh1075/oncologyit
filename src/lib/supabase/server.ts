@@ -39,9 +39,14 @@ export async function createClient() {
  * Only for server-side operations (certificate generation, etc.)
  */
 export function createAdminClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) {
+    throw new Error(
+      "createAdminClient requires NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY. " +
+      "This indicates a server misconfiguration — admin operations must never run without real credentials."
+    );
+  }
   const { createClient } = require("@supabase/supabase-js");
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+  return createClient(url, key);
 }

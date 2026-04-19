@@ -1,0 +1,64 @@
+{
+  "$ref": "#/definitions/articles",
+  "definitions": {
+    "articles": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "tag": {
+          "type": "string",
+          "enum": [
+            "deep-dive",
+            "signal",
+            "framework",
+            "analysis",
+            "opinion"
+          ]
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "draft": {
+          "type": "boolean",
+          "default": false
+        },
+        "readTime": {
+          "type": "string"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "date",
+        "tag"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

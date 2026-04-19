@@ -62,6 +62,18 @@ export const CATEGORIES: VendorCategory[] = [
     name: 'Patient Engagement',
     description: 'Patient portals, navigation platforms, and remote monitoring tools for cancer care.',
     icon: '❤️'
+  },
+  {
+    id: 'ai-clinical-decision-support',
+    name: 'AI Clinical Decision Support',
+    description: 'Artificial intelligence systems that assist oncologists with diagnosis, treatment planning, and clinical decision-making.',
+    icon: '🤖'
+  },
+  {
+    id: 'population-health-registry',
+    name: 'Population Health & Registry',
+    description: 'Real-world evidence platforms, cancer registries, and population health analytics for oncology.',
+    icon: '📈'
   }
 ];
 
@@ -145,6 +157,63 @@ export const VENDORS: Vendor[] = [
       'Real-time symptom alerting to clinical teams',
       'Partnerships with over 2,500 oncology providers nationwide'
     ]
+  },
+  {
+    id: 'massive-bio',
+    name: 'Massive Bio',
+    category: 'clinical-trial-matching',
+    description: 'Massive Bio is an AI-powered platform that connects cancer patients to clinical trials globally, using proprietary algorithms to match patients based on their genomic and clinical profiles. The platform operates across 17 countries and partners with pharmaceutical companies to accelerate trial recruitment.',
+    website: 'https://massivebio.com',
+    founded: 2015,
+    headquarters: 'Istanbul, Turkey (with US operations)',
+    employees: '51-200',
+    revenue: '$10-20M (est.)',
+    oncologyFocus: ['Clinical Trial Matching', 'Precision Oncology', 'Global Trial Access'],
+    keyProducts: ['AI Trial Matching Platform', 'Virtual Tumor Board', 'Pharma Partnership Services', 'Global Trial Network'],
+    recentDevelopments: [
+      'Expansion to 17 countries across North America, Europe, and LATAM',
+      'Partnerships with major pharmaceutical companies for trial recruitment',
+      'AI algorithm enhancements improving match accuracy',
+      'Integration with community oncology practices nationwide'
+    ]
+  },
+  {
+    id: 'canceriq',
+    name: 'CancerIQ',
+    category: 'ai-clinical-decision-support',
+    description: 'CancerIQ provides an AI-powered platform that helps healthcare providers identify patients at genetic risk for cancer and deliver personalized prevention plans. The platform integrates genetic data with clinical information to support risk assessment, early detection, and personalized treatment planning.',
+    website: 'https://www.canceriq.com',
+    founded: 2013,
+    headquarters: 'Chicago, Illinois',
+    employees: '11-50',
+    revenue: '$5-10M (est.)',
+    oncologyFocus: ['Genetic Risk Assessment', 'Cancer Prevention', 'Early Detection', 'Personalized Care Planning'],
+    keyProducts: ['Risk Assessment Platform', 'Genetic Counseling Tools', 'Prevention Planning', 'Clinical Decision Support'],
+    recentDevelopments: [
+      '$23.9M in total funding including investment from Amgen',
+      'Expansion of genetic risk assessment capabilities',
+      'Integration with major EHR systems for point-of-care genetic evaluation',
+      'Partnerships with health systems for population cancer risk screening'
+    ]
+  },
+  {
+    id: 'cota',
+    name: 'COTA Healthcare',
+    category: 'population-health-registry',
+    description: 'COTA Healthcare is an oncology real-world data and analytics company that organizes complex cancer data to provide insights for research, drug development, and clinical care. Founded by oncologists and data scientists, COTA transforms fragmented real-world data into actionable intelligence for improving cancer outcomes.',
+    website: 'https://cotahealthcare.com',
+    founded: 2011,
+    headquarters: 'New York, New York',
+    employees: '100-250',
+    revenue: '$20-50M (est.)',
+    oncologyFocus: ['Real-World Evidence', 'Clinical Analytics', 'Drug Development', 'Outcomes Research'],
+    keyProducts: ['Real-World Data Platform', 'Analytics Suite', 'Regulatory Solutions', 'HEOR Services'],
+    recentDevelopments: [
+      'Leadership transition to medical oncologist CEO',
+      'Expansion of real-world data partnerships with life sciences companies',
+      'Enhanced analytics for immuno-oncology treatments',
+      'Collaborations with cancer centers for quality improvement initiatives'
+    ]
   }
 ];
 
@@ -173,5 +242,6 @@ export function getAllCategories(): VendorCategory[] {
 export const FEATURED_VENDORS: string[] = [
   'nextech',
   'pathai',
-  'navigating-cancer'
+  'navigating-cancer',
+  'canceriq'
 ];

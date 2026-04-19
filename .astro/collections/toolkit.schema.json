@@ -1,0 +1,49 @@
+{
+  "$ref": "#/definitions/toolkit",
+  "definitions": {
+    "toolkit": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "books",
+            "tools",
+            "education",
+            "frameworks"
+          ]
+        },
+        "url": {
+          "type": "string"
+        },
+        "affiliateUrl": {
+          "type": "string"
+        },
+        "sortOrder": {
+          "type": "number",
+          "default": 0
+        },
+        "draft": {
+          "type": "boolean",
+          "default": false
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "category"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
